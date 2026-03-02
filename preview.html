@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiệp 8-3</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+}
+
+/* Hoa rơi */
+.flower{
+    position:absolute;
+    top:-10px;
+    font-size:20px;
+    animation:fall linear infinite;
+    opacity:0.8;
+}
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* Phong bì */
+.envelope{
+    position:relative;
+    width:350px;
+    height:230px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    cursor:pointer;
+    transition:0.5s;
+}
+
+.flap{
+    position:absolute;
+    top:0;
+    width:100%;
+    height:100%;
+    background:#ff6f91;
+    clip-path:polygon(0 0,100% 0,50% 60%);
+    transition:0.5s;
+    transform-origin:top;
+}
+
+.letter{
+    position:absolute;
+    width:90%;
+    height:180px;
+    background:white;
+    top:25px;
+    left:5%;
+    border-radius:10px;
+    padding:20px;
+    text-align:center;
+    transition:0.7s;
+    transform:translateY(40px);
+    opacity:0;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+h1{
+    font-family:'Great Vibes',cursive;
+    font-size:38px;
+    color:#ff4d6d;
+    margin-bottom:10px;
+}
+
+p{
+    font-size:15px;
+    color:#555;
+    margin-top:10px;
+}
+
+.open .flap{
+    transform:rotateX(180deg);
+}
+
+.open .letter{
+    transform:translateY(-120px);
+    opacity:1;
+}
+
+/* Nút */
+button{
+    margin-top:15px;
+    padding:8px 18px;
+    border:none;
+    border-radius:20px;
+    background:#ff4d6d;
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+}
+button:hover{
+    background:#e63950;
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openCard()">
+    <div class="flap"></div>
+    <div class="letter">
+        <h1>Chúc Mừng 8/3</h1>
+        <p>
+            Chúc bạn luôn xinh đẹp, mạnh mẽ và hạnh phúc 💐  
+            Cảm ơn vì đã luôn là điều tuyệt vời nhất!
+        </p>
+        <button onclick="event.stopPropagation(); alert('Yêu thương thật nhiều ❤️')">
+            Gửi yêu thương 💖
+        </button>
+    </div>
+</div>
+
+<script>
+function openCard(){
+    document.querySelector('.envelope').classList.toggle('open');
+}
+
+/* Tạo hoa rơi */
+function createFlowers(){
+    for(let i=0;i<30;i++){
+        let flower=document.createElement("div");
+        flower.className="flower";
+        flower.innerHTML="🌸";
+        flower.style.left=Math.random()*100+"vw";
+        flower.style.animationDuration=(Math.random()*5+5)+"s";
+        flower.style.fontSize=(Math.random()*20+15)+"px";
+        document.body.appendChild(flower);
+
+        setTimeout(()=>{flower.remove();},10000);
+    }
+}
+createFlowers();
+setInterval(createFlowers,8000);
+</script>
+
+</body>
+</html>
